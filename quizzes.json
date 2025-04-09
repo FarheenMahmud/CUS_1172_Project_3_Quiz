@@ -1,0 +1,35 @@
+[
+    {
+      "id": 1,
+      "type": "multiple-choice",
+      "question": "Which period did the Stegosaurus live in?",
+      "choices": ["Triassic", "Jurassic", "Cretaceous", "Permian"],
+      "answer": "Jurassic",
+      "explanation": "Stegosaurus lived during the late Jurassic period, around 155 to 150 million years ago."
+    },
+    {
+      "id": 2,
+      "type": "narrative",
+      "question": "Name one dinosaur species that lived during the Triassic period.",
+      "answer": "Coelophysis",
+      "explanation": "Coelophysis was one of the earliest known dinosaurs, living during the Late Triassic period."
+    },
+    {
+      "id": 3,
+      "type": "image-choice",
+      "question": "Which of these is a Triceratops?",
+      "choices": [
+        {
+          "img": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/images/triceratops.jpg",
+          "label": "A"
+        },
+        {
+          "img": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/images/t-rex.jpg",
+          "label": "B"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Triceratops had three facial horns and a large frill, unlike T-Rex."
+    }
+  ]
+  
