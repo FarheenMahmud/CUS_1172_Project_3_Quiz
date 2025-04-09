@@ -1,0 +1,11 @@
+body {
+    background-color: #f4f4f4;
+  }
+  
+  .feedback {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffeeba;
+    padding: 15px;
+    margin-top: 15px;
+  }
+  
