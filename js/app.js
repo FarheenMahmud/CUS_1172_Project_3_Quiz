@@ -18,20 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
   renderStartScreen();
 });
 
-function renderStartScreen() {
-  Views.showStart(appContainer);
+async function renderStartScreen() { // Make renderStartScreen async
+  await Views.showStart(appContainer); // Wait for the template to render
 
   const form = document.getElementById('start-form');
-  console.log('Start form element:', form); // Add this line
+  console.log('Start form element:', form);
   if (form) {
     form.addEventListener('submit', handleStartQuiz);
   } else {
-    console.log('Start form not found!'); // Add this line
+    console.log('Start form not found!');
   }
 }
 
 function handleStartQuiz(e) {
-  console.log('handleStartQuiz called'); // Add this line
+  console.log('handleStartQuiz called');
   e.preventDefault();
   studentName = e.target.name.value.trim();
   const selectedQuizId = e.target.quiz.value;
