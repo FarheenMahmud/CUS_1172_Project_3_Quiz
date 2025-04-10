@@ -1,4 +1,4 @@
-import { renderTemplate, showElement, hideElement } from './views.js';
+import { Views } from './views.js';
 
 let studentName = '';
 let currentQuiz = null;
@@ -10,8 +10,8 @@ let quizInterval = null;
 
 // === DOM References ===
 const appContainer = document.getElementById('app');
-const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ/quizzes'; // <-- Replace this
-const specificQuizEndpoint = `${quizApiBase}/quizzes`; 
+const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ';
+const quizzesEndpoint = `${quizApiBase}/quizzes`;
 
 // === Startup ===
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function renderStartScreen() {
-  renderTemplate('start', {}, appContainer);
+  Views.showStart(appContainer);
 
   const form = document.getElementById('start-form');
   form.addEventListener('submit', (e) => {
@@ -36,9 +36,15 @@ function renderStartScreen() {
 // === Load Quiz JSON from API ===
 async function loadQuiz(quizId) {
   try {
-    const res = await fetch(`${quizApiBase}/${quizId}`);
-    if (!res.ok) throw new Error('Failed to load quiz');
-    currentQuiz = await res.json();
+    const res = await fetch(quizzesEndpoint); // Fetch the entire quizzes.json
+    if (!res.ok) throw new Error('Failed to load quizzes');
+    const allQuizzes = await res.json();
+    currentQuiz = allQuizzes.find(quiz => quiz.id.toString() === quizId); // Find the selected quiz
+
+    if (!currentQuiz) {
+      throw new Error(`Quiz with ID ${quizId} not found`);
+    }
+
     totalQuestions = currentQuiz.questions.length;
     currentQuestionIndex = 0;
     score = 0;
@@ -48,7 +54,7 @@ async function loadQuiz(quizId) {
     renderCurrentQuestion();
   } catch (error) {
     console.error('Error loading quiz:', error);
-    renderTemplate('error', { message: 'Failed to load quiz.' }, appContainer);
+    // You might want to render an error message in the UI here using Views
   }
 }
 
@@ -62,7 +68,7 @@ function startTimer() {
 }
 
 // === Render One Question ===
-function renderCurrentQuestion() {
+async function renderCurrentQuestion() {
   if (currentQuestionIndex >= totalQuestions) {
     endQuiz();
     return;
@@ -73,26 +79,28 @@ function renderCurrentQuestion() {
     questionNumber: currentQuestionIndex + 1,
     totalQuestions,
     question,
-    studentName
+    studentName,
   };
 
-  renderTemplate(`question-${question.type}`, questionData, appContainer);
+  await Views.showQuestion(appContainer, questionData);
 
   // Handle answer submission
   const form = document.getElementById('question-form');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const userAnswer = getAnswerFromForm(form, question);
-    const isCorrect = checkAnswer(userAnswer, question);
+      const userAnswer = getAnswerFromForm(form, question);
+      const isCorrect = checkAnswer(userAnswer, question);
 
-    if (isCorrect) {
-      score++;
-      renderFeedback('correct');
-    } else {
-      renderFeedback('wrong', question);
-    }
-  });
+      if (isCorrect) {
+        score++;
+        renderFeedback('correct');
+      } else {
+        renderFeedback('wrong', question);
+      }
+    });
+  }
 
   updateScoreboard();
 }
@@ -116,21 +124,24 @@ function checkAnswer(userAnswer, question) {
 // === Feedback ===
 function renderFeedback(type, question = null) {
   if (type === 'correct') {
-    renderTemplate('feedback-correct', {}, appContainer);
+    Views.showCorrect(appContainer);
     setTimeout(() => {
       currentQuestionIndex++;
       renderCurrentQuestion();
     }, 1000);
   } else {
-    renderTemplate('feedback-wrong', {
+    Views.showWrong(appContainer, {
       correctAnswer: question.correctAnswer,
       explanation: question.explanation || '',
-    }, appContainer);
-
-    document.getElementById('got-it-btn').addEventListener('click', () => {
-      currentQuestionIndex++;
-      renderCurrentQuestion();
     });
+
+    const gotItBtn = document.getElementById('got-it-btn');
+    if (gotItBtn) {
+      gotItBtn.addEventListener('click', () => {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      });
+    }
   }
 }
 
@@ -151,14 +162,17 @@ function updateScoreboard() {
 function endQuiz() {
   clearInterval(quizInterval);
   const passed = (score / totalQuestions) >= 0.8;
-  renderTemplate('end', {
+  Views.showResult(appContainer, {
     studentName,
     score,
     totalQuestions,
-    passed
-  }, appContainer);
-
-  document.getElementById('restart-btn').addEventListener('click', () => {
-    renderStartScreen();
+    passed,
   });
+
+  const restartBtn = document.getElementById('restart-btn');
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      renderStartScreen();
+    });
+  }
 }
