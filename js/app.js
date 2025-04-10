@@ -34,9 +34,9 @@ function handleStartQuiz(e) {
   console.log('handleStartQuiz called');
   e.preventDefault();
 
-  const form = e.currentTarget; // Use e.currentTarget to target the form
-  const nameInput = form.elements.name;
-  const quizSelect = form.elements.quiz;
+  const form = e.currentTarget; // Ensure we're working with the form
+  const nameInput = form.querySelector('input[name="name"]');
+  const quizSelect = form.querySelector('select[name="quiz"]');
 
   if (nameInput && quizSelect) {
     studentName = nameInput.value.trim();
@@ -46,7 +46,7 @@ function handleStartQuiz(e) {
       loadQuiz(selectedQuizId);
     }
   } else {
-    console.error("Name or quiz input elements not found in the form.");
+    console.error("Name or quiz input elements not found within the form.");
   }
 }
 
