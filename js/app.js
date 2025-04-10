@@ -10,7 +10,8 @@ let quizInterval = null;
 
 // === DOM References ===
 const appContainer = document.getElementById('app');
-const quizApiBase = 'https://my-json-server.typicode.com/YOUR_USERNAME/YOUR_REPO/quizzes'; // <-- Replace this
+const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ/quizzes'; // <-- Replace this
+const specificQuizEndpoint = `${quizApiBase}/quizzes`; 
 
 // === Startup ===
 document.addEventListener('DOMContentLoaded', () => {
