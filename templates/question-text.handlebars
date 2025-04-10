@@ -1,0 +1,14 @@
+<div class="card p-4">
+  <h4 class="mb-3">Question {{questionNumber}} of {{totalQuestions}}</h4>
+  <p>{{questionText}}</p>
+
+  <form id="text-question-form">
+    <input type="text" name="answer" class="form-control mb-3" placeholder="Type your answer..." required />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <div class="mt-3">
+    <strong>Time:</strong> {{elapsedTime}} seconds |
+    <strong>Score:</strong> {{score}}/{{questionNumber}}
+  </div>
+</div>
