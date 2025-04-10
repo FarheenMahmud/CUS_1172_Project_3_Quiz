@@ -25,6 +25,11 @@ async function renderStartScreen() { // Make renderStartScreen async
   console.log('Start form element:', form);
   if (form) {
     form.addEventListener('submit', handleStartQuiz);
+    // Get direct references to the input and select elements
+    form.nameInput = form.querySelector('input[name="name"]');
+    form.quizSelect = form.querySelector('select[name="quiz"]');
+    console.log('Directly found nameInput:', form.nameInput);
+    console.log('Directly found quizSelect:', form.quizSelect);
   } else {
     console.log('Start form not found!');
   }
@@ -35,26 +40,24 @@ function handleStartQuiz(e) {
   e.preventDefault();
 
   const form = e.currentTarget;
-  console.log('Form innerHTML:', form.innerHTML);
 
-  setTimeout(() => {
-    const nameInput = form.querySelector('input[name="name"]');
-    const quizSelect = form.querySelector('select[name="quiz"]');
+  // Access the elements using the direct references
+  const nameInput = form.nameInput;
+  const quizSelect = form.quizSelect;
 
-    console.log('nameInput (setTimeout):', nameInput);
-    console.log('quizSelect (setTimeout):', quizSelect);
+  console.log('nameInput (from form ref):', nameInput);
+  console.log('quizSelect (from form ref):', quizSelect);
 
-    if (nameInput && quizSelect) {
-      studentName = nameInput.value.trim();
-      const selectedQuizId = quizSelect.value;
+  if (nameInput && quizSelect) {
+    studentName = nameInput.value.trim();
+    const selectedQuizId = quizSelect.value;
 
-      if (studentName && selectedQuizId) {
-        loadQuiz(selectedQuizId);
-      }
-    } else {
-      console.error("Name or quiz input elements NOT FOUND within the form (setTimeout).");
+    if (studentName && selectedQuizId) {
+      loadQuiz(selectedQuizId);
     }
-  }, 0);
+  } else {
+    console.error("Name or quiz input elements NOT FOUND via direct form reference.");
+  }
 }
 
 // === Load Quiz JSON from API ===
