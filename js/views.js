@@ -4,6 +4,7 @@ export const Views = {
   async showStart(container) {
     const html = await loadTemplate('start');
     container.innerHTML = html;
+    return Promise.resolve();
   },
 
   async showQuestion(container, question) {

@@ -22,7 +22,12 @@ function renderStartScreen() {
   Views.showStart(appContainer);
 
   const form = document.getElementById('start-form');
-  form.addEventListener('submit', handleStartQuiz);
+  console.log('Start form element:', form); // Add this line
+  if (form) {
+    form.addEventListener('submit', handleStartQuiz);
+  } else {
+    console.log('Start form not found!'); // Add this line
+  }
 }
 
 function handleStartQuiz(e) {
