@@ -34,7 +34,9 @@ function handleStartQuiz(e) {
   console.log('handleStartQuiz called');
   e.preventDefault();
 
-  const form = e.currentTarget; // Ensure we're working with the form
+  const form = e.currentTarget;
+  console.log('Form innerHTML:', form.innerHTML); // Add this line
+
   const nameInput = form.querySelector('input[name="name"]');
   const quizSelect = form.querySelector('select[name="quiz"]');
 
