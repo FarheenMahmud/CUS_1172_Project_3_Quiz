@@ -10,7 +10,6 @@
 <body>
   <div id="app" class="container mt-5"></div>
 
-  <!-- Handlebars templates go here -->
   <script id="start" type="text/x-handlebars-template">
    
     <h2>Welcome!</h2>
@@ -18,16 +17,14 @@
       <input type="text" name="name" placeholder="Your name" required />
       <select name="quiz" required>
         <option value="">Select a quiz</option>
-        <option value="frontend">Front-End Web Development</option>
+        <option value="1">Front-End Web Development</option>
       </select>
       <button type="submit">Start Quiz</button>
     </form>
   </script>
 
-  <!--Handlebars -->
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
 
-  <!--Scripts -->
   <script type="module" src="js/views.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
