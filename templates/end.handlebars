@@ -1,0 +1,17 @@
+<div class="card p-4 text-center">
+  <h2 class="mb-4">
+    {{#if passed}}
+      🎉 Congratulations, {{studentName}}! You passed the quiz!
+    {{else}}
+      😢 Sorry, {{studentName}}. You didn't pass the quiz.
+    {{/if}}
+  </h2>
+
+  <p class="lead">Final Score: {{score}} / {{totalQuestions}}</p>
+  <p>Time Taken: {{elapsedTime}} seconds</p>
+
+  <div class="mt-4">
+    <button id="retake-btn" class="btn btn-outline-primary me-2">Re-Take Quiz</button>
+    <button id="home-btn" class="btn btn-secondary">Return to Main Page</button>
+  </div>
+</div>
