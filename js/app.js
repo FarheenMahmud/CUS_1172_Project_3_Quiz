@@ -39,22 +39,16 @@ async function loadQuiz(quizId) {
     const res = await fetch(quizzesEndpoint); // Fetch the entire quizzes.json
     if (!res.ok) throw new Error('Failed to load quizzes');
     const allQuizzes = await res.json();
-    currentQuiz = allQuizzes.find(quiz => quiz.id.toString() === quizId); // Find the selected quiz
+    currentQuiz = allQuizzes.find(quiz => quiz.id.toString() === quizId);
 
     if (!currentQuiz) {
       throw new Error(`Quiz with ID ${quizId} not found`);
     }
 
-    totalQuestions = currentQuiz.questions.length;
-    currentQuestionIndex = 0;
-    score = 0;
-    startTime = Date.now();
-
-    startTimer();
-    renderCurrentQuestion();
+    // ... rest of your loadQuiz function ...
   } catch (error) {
     console.error('Error loading quiz:', error);
-    // You might want to render an error message in the UI here using Views
+    // Consider displaying an error message to the user
   }
 }
 
