@@ -41,12 +41,12 @@ function handleStartQuiz(e) {
 
   const form = e.currentTarget;
 
-  // Access the elements using the direct references
-  const nameInput = form.nameInput;
-  const quizSelect = form.quizSelect;
+  // Directly query the elements based on the form's ID
+  const nameInput = document.querySelector('#start-form input[name="name"]');
+  const quizSelect = document.querySelector('#start-form select[name="quiz"]');
 
-  console.log('nameInput (from form ref):', nameInput);
-  console.log('quizSelect (from form ref):', quizSelect);
+  console.log('nameInput (direct query in handler):', nameInput);
+  console.log('quizSelect (direct query in handler):', quizSelect);
 
   if (nameInput && quizSelect) {
     studentName = nameInput.value.trim();
@@ -56,7 +56,7 @@ function handleStartQuiz(e) {
       loadQuiz(selectedQuizId);
     }
   } else {
-    console.error("Name or quiz input elements NOT FOUND via direct form reference.");
+    console.error("Name or quiz input elements NOT FOUND via direct query in handler.");
   }
 }
 
