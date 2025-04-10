@@ -33,11 +33,19 @@ async function renderStartScreen() { // Make renderStartScreen async
 function handleStartQuiz(e) {
   console.log('handleStartQuiz called');
   e.preventDefault();
-  studentName = e.target.name.value.trim();
-  const selectedQuizId = e.target.quiz.value;
 
-  if (studentName && selectedQuizId) {
-    loadQuiz(selectedQuizId);
+  const nameInput = e.target.elements.name;
+  const quizSelect = e.target.elements.quiz;
+
+  if (nameInput && quizSelect) {
+    studentName = nameInput.value.trim();
+    const selectedQuizId = quizSelect.value;
+
+    if (studentName && selectedQuizId) {
+      loadQuiz(selectedQuizId);
+    }
+  } else {
+    console.error("Name or quiz input elements not found in the form.");
   }
 }
 
