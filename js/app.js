@@ -22,33 +22,43 @@ function renderStartScreen() {
   Views.showStart(appContainer);
 
   const form = document.getElementById('start-form');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    studentName = form.name.value.trim();
-    const selectedQuiz = form.quiz.value;
+  form.addEventListener('submit', handleStartQuiz);
+}
 
-    if (studentName && selectedQuiz) {
-      loadQuiz(selectedQuiz);
-    }
-  });
+function handleStartQuiz(e) {
+  e.preventDefault();
+  studentName = e.target.name.value.trim();
+  const selectedQuizId = e.target.quiz.value;
+
+  if (studentName && selectedQuizId) {
+    loadQuiz(selectedQuizId);
+  }
 }
 
 // === Load Quiz JSON from API ===
 async function loadQuiz(quizId) {
   try {
-    const res = await fetch(quizzesEndpoint); // Fetch the entire quizzes.json
-    if (!res.ok) throw new Error('Failed to load quizzes');
-    const allQuizzes = await res.json();
-    currentQuiz = allQuizzes.find(quiz => quiz.id.toString() === quizId);
+    const res = await fetch(quizzesEndpoint);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch quizzes: ${res.status}`);
+    }
+    const data = await res.json();
+    currentQuiz = data.find(quiz => quiz.id.toString() === quizId);
 
     if (!currentQuiz) {
       throw new Error(`Quiz with ID ${quizId} not found`);
     }
 
-    // ... rest of your loadQuiz function ...
+    totalQuestions = currentQuiz.questions.length;
+    currentQuestionIndex = 0;
+    score = 0;
+    startTime = Date.now();
+
+    startTimer();
+    renderCurrentQuestion();
   } catch (error) {
     console.error('Error loading quiz:', error);
-    // Consider displaying an error message to the user
+    // Consider displaying an error message to the user in the UI
   }
 }
 
@@ -57,7 +67,9 @@ function startTimer() {
   const timerElement = document.getElementById('timer');
   quizInterval = setInterval(() => {
     const seconds = Math.floor((Date.now() - startTime) / 1000);
-    if (timerElement) timerElement.textContent = `Time: ${seconds}s`;
+    if (timerElement) {
+      timerElement.textContent = `Time: ${seconds}s`;
+    }
   }, 1000);
 }
 
@@ -78,25 +90,25 @@ async function renderCurrentQuestion() {
 
   await Views.showQuestion(appContainer, questionData);
 
-  // Handle answer submission
   const form = document.getElementById('question-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const userAnswer = getAnswerFromForm(form, question);
-      const isCorrect = checkAnswer(userAnswer, question);
-
-      if (isCorrect) {
-        score++;
-        renderFeedback('correct');
-      } else {
-        renderFeedback('wrong', question);
-      }
-    });
+    form.addEventListener('submit', handleAnswerSubmit);
   }
+}
 
-  updateScoreboard();
+function handleAnswerSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const question = currentQuiz.questions[currentQuestionIndex];
+  const userAnswer = getAnswerFromForm(form, question);
+  const isCorrect = checkAnswer(userAnswer, question);
+
+  if (isCorrect) {
+    score++;
+    renderFeedback('correct');
+  } else {
+    renderFeedback('wrong', question);
+  }
 }
 
 function getAnswerFromForm(form, question) {
