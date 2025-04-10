@@ -35,21 +35,26 @@ function handleStartQuiz(e) {
   e.preventDefault();
 
   const form = e.currentTarget;
-  console.log('Form innerHTML:', form.innerHTML); // Add this line
+  console.log('Form innerHTML:', form.innerHTML);
 
-  const nameInput = form.querySelector('input[name="name"]');
-  const quizSelect = form.querySelector('select[name="quiz"]');
+  setTimeout(() => {
+    const nameInput = form.querySelector('input[name="name"]');
+    const quizSelect = form.querySelector('select[name="quiz"]');
 
-  if (nameInput && quizSelect) {
-    studentName = nameInput.value.trim();
-    const selectedQuizId = quizSelect.value;
+    console.log('nameInput (setTimeout):', nameInput);
+    console.log('quizSelect (setTimeout):', quizSelect);
 
-    if (studentName && selectedQuizId) {
-      loadQuiz(selectedQuizId);
+    if (nameInput && quizSelect) {
+      studentName = nameInput.value.trim();
+      const selectedQuizId = quizSelect.value;
+
+      if (studentName && selectedQuizId) {
+        loadQuiz(selectedQuizId);
+      }
+    } else {
+      console.error("Name or quiz input elements NOT FOUND within the form (setTimeout).");
     }
-  } else {
-    console.error("Name or quiz input elements not found within the form.");
-  }
+  }, 0);
 }
 
 // === Load Quiz JSON from API ===
