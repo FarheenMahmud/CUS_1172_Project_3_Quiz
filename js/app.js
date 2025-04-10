@@ -34,8 +34,9 @@ function handleStartQuiz(e) {
   console.log('handleStartQuiz called');
   e.preventDefault();
 
-  const nameInput = e.target.elements.name;
-  const quizSelect = e.target.elements.quiz;
+  const form = e.currentTarget; // Use e.currentTarget to target the form
+  const nameInput = form.elements.name;
+  const quizSelect = form.elements.quiz;
 
   if (nameInput && quizSelect) {
     studentName = nameInput.value.trim();
