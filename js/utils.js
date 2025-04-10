@@ -1,8 +1,6 @@
-export async function loadTemplate(name, data = {}) {
-    const src = `/templates/${name}.handlebars`;
-    const res = await fetch(src);
-    const templateText = await res.text();
-    const template = Handlebars.compile(templateText);
-    return template(data);
-  }
-  
+
+export async function loadTemplate(name) {
+  const res = await fetch(`templates/${name}.handlebars`);
+  const src = await res.text();
+  return Handlebars.compile(src);
+}
