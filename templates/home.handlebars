@@ -1,16 +1,29 @@
 <div class="card">
   <div class="card-body">
-    <h2>Welcome to Dinosaur Trivia!</h2>
-    <form id="startForm">
+    <h2>Welcome to Webdev Trivia!</h2>
+    <form id="start-form">
       <div class="mb-3">
         <label for="name" class="form-label">Enter your name:</label>
-        <input type="text" id="name" class="form-control" required />
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-control" 
+          placeholder="e.g. Ada Lovelace"
+          required 
+        />
       </div>
       <div class="mb-3">
-        <label class="form-label">Select a quiz:</label>
-        <select id="quizSelect" class="form-select">
-          <option value="dinos">Dinosaur Periods</option>
-          <option value="fossils">Fossils & Evolution</option>
+        <label for="quiz" class="form-label">Select a quiz:</label>
+        <select 
+          id="quiz" 
+          name="quiz" 
+          class="form-select" 
+          required
+        >
+          <option value="">-- Choose a topic --</option>
+          <option value="html-css">HTML & CSS</option>
+          <option value="javascript">JavaScript Basics</option>
         </select>
       </div>
       <button class="btn btn-primary" type="submit">Start Quiz</button>
