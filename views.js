@@ -1,4 +1,4 @@
-import { loadTemplate } from './utils.js';
+import { loadTemplate } from './js/utils.js';
 
 export const Views = {
   async showStart(container) {
