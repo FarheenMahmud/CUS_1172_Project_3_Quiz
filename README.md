@@ -1,3 +1,3 @@
-# Dinosaur Trivia Quiz
+# Front-End Web Development Quiz
 
-Welcome to the **Dinosaur Trivia Quiz**! This interactive quiz is designed to test your knowledge about dinosaurs, including the periods they lived in, their sizes, and other fascinating facts. The quiz contains multiple choice, narrative, and image-based questions.
+Test your HTML, CSS, and JavaScript knowledge! This interactive quiz includes multiple choice, short answer, and image-based questions to help you learn front-end web development concepts.
