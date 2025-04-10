@@ -31,6 +31,7 @@ function renderStartScreen() {
 }
 
 function handleStartQuiz(e) {
+  console.log('handleStartQuiz called'); // Add this line
   e.preventDefault();
   studentName = e.target.name.value.trim();
   const selectedQuizId = e.target.quiz.value;
