@@ -1,8 +1,8 @@
 {
   "quizzes": [
     {
-      "id": 1,
-      "title": "Front-End Web Development",
+      "id": "html-css",
+      "title": "HTML and CSS",
       "questions": [
         {
           "type": "multiple-choice",
@@ -16,7 +16,13 @@
           "question": "What CSS property controls the text size?",
           "correctAnswer": "font-size",
           "explanation": "`font-size` is the property used to define the size of text in CSS."
-        },
+        }
+      ]
+    },
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "questions": [
         {
           "type": "image-choice",
           "question": "Which logo represents JavaScript?",
@@ -32,6 +38,12 @@
           ],
           "correctAnswer": "A",
           "explanation": "The yellow square with JS is the JavaScript logo."
+        },
+        {
+          "type": "narrative",
+          "question": "What keyword declares a variable in JavaScript?",
+          "correctAnswer": "let",
+          "explanation": "`let` is commonly used to declare variables in modern JavaScript."
         }
       ]
     }
