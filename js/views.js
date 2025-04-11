@@ -1,10 +1,12 @@
+//views.js
+
 import { loadTemplate } from './utils.js';
 
 export const Views = {
-  async showStart(container) {
+  async showStart(container, context) {
     const templateSource = document.getElementById('start').innerHTML;
     const template = Handlebars.compile(templateSource);
-    const html = template({}); // No context needed for this simple template
+    const html = template({});
     container.innerHTML = html;
     const form = container.querySelector('#start-form');
     if (form) {
@@ -12,15 +14,15 @@ export const Views = {
         e.preventDefault();
         const nameInput = form.querySelector('input[name="name"]');
         const quizSelect = form.querySelector('select[name="quiz"]');
-
+  
         console.log('handleStartQuiz (inline) called');
         console.log('nameInput (inline):', nameInput);
         console.log('quizSelect (inline):', quizSelect);
-
+  
         if (nameInput && quizSelect) {
-          studentName = nameInput.value.trim();
+          window.studentName = nameInput.value.trim(); // Update the global studentName (temporary)
           const selectedQuizId = quizSelect.value;
-          loadQuiz(selectedQuizId);
+          loadQuiz(selectedQuizId); // Assuming loadQuiz is in scope
         } else {
           console.error("Name or quiz input elements NOT FOUND (inline).");
         }

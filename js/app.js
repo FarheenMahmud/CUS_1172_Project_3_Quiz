@@ -1,3 +1,5 @@
+//app.js
+
 import { Views } from './views.js';
 
 let studentName = '';
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function renderStartScreen() {
-  await Views.showStart(appContainer);
+  await Views.showStart(appContainer, { studentName: studentName });
 }
 
 function handleStartQuiz(e) {
