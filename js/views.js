@@ -38,7 +38,7 @@ export const Views = {
       'multiple-choice': 'question-mc',
       'narrative': 'question-narrative',
       'image-choice': 'question-image'
-    }[question.type];
+    }[question.question?.type];
 
     const html = await loadTemplate(templateName, question);
     container.innerHTML = html;
