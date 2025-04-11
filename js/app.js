@@ -1,4 +1,4 @@
-//app.js
+// app.js
 
 import { Views } from './views.js';
 
@@ -31,8 +31,8 @@ function handleStartQuiz(e) {
   const form = e.currentTarget;
 
   // Directly query the elements based on the form's ID
-  const nameInput = document.querySelector('#start-form input[name="name"]');
-  const quizSelect = document.querySelector('#start-form select[name="quiz"]');
+  const nameInput = form.querySelector('input[name="name"]');
+  const quizSelect = form.querySelector('select[name="quiz"]');
 
   console.log('nameInput (direct query in handler):', nameInput);
   console.log('quizSelect (direct query in handler):', quizSelect);
@@ -196,6 +196,5 @@ function endQuiz() {
     });
   }
 }
-
 
 export { loadQuiz };
