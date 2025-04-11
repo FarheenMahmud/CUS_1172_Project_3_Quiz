@@ -196,3 +196,6 @@ function endQuiz() {
     });
   }
 }
+
+
+export { loadQuiz };

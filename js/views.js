@@ -1,6 +1,8 @@
 //views.js
 
 import { loadTemplate } from './utils.js';
+import { loadTemplate } from './utils.js';
+import { loadQuiz } from './app.js'; // Import loadQuiz
 
 export const Views = {
   async showStart(container, context) {
