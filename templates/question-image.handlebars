@@ -1,7 +1,7 @@
 <div class="container">
-  <h3>{{question}}</h3>
+  <h3>{{question.question}}</h3>
   <div class="row">
-    {{#each choices}}
+    {{#each question.choices}}
       <div class="col-md-6">
         <img src="{{img}}" class="img-fluid img-choice" data-answer="{{label}}">
       </div>
