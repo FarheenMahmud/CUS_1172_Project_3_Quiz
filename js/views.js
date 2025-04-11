@@ -2,6 +2,9 @@
 
 import { loadTemplate } from './utils.js';
 
+
+import { handleStartQuizSubmit } from './app.js'; // Import the handler
+
 export const Views = {
   async showStart(container, context) {
     const templateSource = document.getElementById('start').innerHTML;
@@ -14,15 +17,11 @@ export const Views = {
         e.preventDefault();
         const nameInput = form.querySelector('input[name="name"]');
         const quizSelect = form.querySelector('select[name="quiz"]');
-  
-        console.log('handleStartQuiz (inline) called');
-        console.log('nameInput (inline):', nameInput);
-        console.log('quizSelect (inline):', quizSelect);
-  
+
         if (nameInput && quizSelect) {
-          window.studentName = nameInput.value.trim(); // Update the global studentName (temporary)
+          window.studentName = nameInput.value.trim();
           const selectedQuizId = quizSelect.value;
-          loadQuiz(selectedQuizId); // Assuming loadQuiz is in scope
+          handleStartQuizSubmit(selectedQuizId); // Call the handler from app.js
         } else {
           console.error("Name or quiz input elements NOT FOUND (inline).");
         }
@@ -58,10 +57,17 @@ export const Views = {
     container.innerHTML = html;
   },
 
-  async showResult(container, { name, score, total }) {
-    const passed = score / total >= 0.8;
+  async showResult(container, { studentName, score, totalQuestions }) {
+    const passed = score / totalQuestions >= 0.8;
     const resultMessage = passed ? `You passed the quiz 🎉` : `You did not pass 😢`;
-    const html = await loadTemplate('result', { name, score, total, resultMessage });
+    const html = await loadTemplate('result', {
+      name: studentName, // rename for clarity
+      score,
+      total: totalQuestions,
+      resultMessage
+    });
     container.innerHTML = html;
   }
+
+
 };
