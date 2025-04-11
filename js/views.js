@@ -13,7 +13,7 @@ export const Views = {
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const nameInput = form.querySelector('#student-name'); // Use the ID from home.handlebars
+        const nameInput = form.querySelector('#name'); // Use the ID from home.handlebars
         const quizSelect = form.querySelector('#quiz'); // Use the ID from home.handlebars
 
         if (nameInput && quizSelect) {
