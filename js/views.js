@@ -2,6 +2,8 @@
 
 import { loadTemplate } from './utils.js';
 
+
+
 export const Views = {
   async showStart(container, context) {
     const templateSource = document.getElementById('start').innerHTML;

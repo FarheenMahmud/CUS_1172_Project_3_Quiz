@@ -10,6 +10,12 @@ let totalQuestions = 0;
 let startTime = null;
 let quizInterval = null;
 
+function handleStartQuizSubmit(selectedQuizId) {
+  loadQuiz(selectedQuizId);
+}
+
+export { handleStartQuizSubmit }; // Make sure to export this function
+
 // === DOM References ===
 const appContainer = document.getElementById('app');
 const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ';
