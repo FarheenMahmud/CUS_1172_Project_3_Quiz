@@ -19,7 +19,7 @@ export { handleStartQuizSubmit }; // Make sure to export this function
 // === DOM References ===
 const appContainer = document.getElementById('app');
 const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ';
-const quizzesEndpoint = `${quizApiBase}/loadError/quizzes`;
+const quizzesEndpoint = `${quizApiBase}/quizzes`;
 
 // === Startup ===
 document.addEventListener('DOMContentLoaded', () => {
