@@ -57,10 +57,17 @@ export const Views = {
     container.innerHTML = html;
   },
 
-  async showResult(container, { name, score, total }) {
-    const passed = score / total >= 0.8;
+  async showResult(container, { studentName, score, totalQuestions }) {
+    const passed = score / totalQuestions >= 0.8;
     const resultMessage = passed ? `You passed the quiz 🎉` : `You did not pass 😢`;
-    const html = await loadTemplate('result', { name, score, total, resultMessage });
+    const html = await loadTemplate('result', {
+      name: studentName, // rename for clarity
+      score,
+      total: totalQuestions,
+      resultMessage
+    });
     container.innerHTML = html;
   }
+
+
 };
