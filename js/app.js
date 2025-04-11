@@ -69,16 +69,23 @@ async function loadQuiz(quizId) {
       throw new Error(`Quiz with ID ${quizId} not found`);
     }
 
-    totalQuestions = currentQuiz.questions.length;
-    currentQuestionIndex = 0;
-    score = 0;
-    startTime = Date.now();
+    // Only proceed if currentQuiz has a value
+    if (currentQuiz) {
+      totalQuestions = currentQuiz.questions.length;
+      currentQuestionIndex = 0;
+      score = 0;
+      startTime = Date.now();
 
-    startTimer();
-    renderCurrentQuestion();
+      startTimer();
+      renderCurrentQuestion();
+    } else {
+      console.error(`Error: Could not load quiz with ID: ${quizId}`);
+      // Optionally display an error message to the user
+    }
+
   } catch (error) {
     console.error('Error loading quiz:', error);
-    // Consider displaying an error message to the user in the UI
+    // Optionally display an error message to the user
   }
 }
 
