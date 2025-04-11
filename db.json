@@ -2,35 +2,38 @@
   "quizzes": [
     {
       "id": 1,
-      "type": "multiple-choice",
-      "question": "Which HTML tag is used to define an unordered list?",
-      "choices": ["<ul>", "<ol>", "<li>", "<list>"],
-      "answer": "<ul>",
-      "explanation": "<ul> defines an unordered list. <ol> is for ordered lists."
-    },
-    {
-      "id": 2,
-      "type": "narrative",
-      "question": "What CSS property controls the text size?",
-      "answer": "font-size",
-      "explanation": "`font-size` is the property used to define the size of text in CSS."
-    },
-    {
-      "id": 3,
-      "type": "image-choice",
-      "question": "Which logo represents JavaScript?",
-      "choices": [
+      "title": "Front-End Web Development",
+      "questions": [
         {
-          "img": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
-          "label": "A"
+          "type": "multiple-choice",
+          "question": "Which HTML tag is used to define an unordered list?",
+          "choices": ["<ul>", "<ol>", "<li>", "<list>"],
+          "correctAnswer": "<ul>",
+          "explanation": "<ul> defines an unordered list. <ol> is for ordered lists."
         },
         {
-          "img": "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
-          "label": "B"
+          "type": "narrative",
+          "question": "What CSS property controls the text size?",
+          "correctAnswer": "font-size",
+          "explanation": "`font-size` is the property used to define the size of text in CSS."
+        },
+        {
+          "type": "image-choice",
+          "question": "Which logo represents JavaScript?",
+          "choices": [
+            {
+              "img": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+              "label": "A"
+            },
+            {
+              "img": "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
+              "label": "B"
+            }
+          ],
+          "correctAnswer": "A",
+          "explanation": "The yellow square with JS is the JavaScript logo."
         }
-      ],
-      "answer": "A",
-      "explanation": "The yellow square with JS is the JavaScript logo."
+      ]
     }
   ]
 }
