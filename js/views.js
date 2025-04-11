@@ -3,6 +3,7 @@
 import { loadTemplate } from './utils.js';
 
 
+import { handleStartQuizSubmit } from './app.js'; // Import the handler
 
 export const Views = {
   async showStart(container, context) {
@@ -16,15 +17,11 @@ export const Views = {
         e.preventDefault();
         const nameInput = form.querySelector('input[name="name"]');
         const quizSelect = form.querySelector('select[name="quiz"]');
-  
-        console.log('handleStartQuiz (inline) called');
-        console.log('nameInput (inline):', nameInput);
-        console.log('quizSelect (inline):', quizSelect);
-  
+
         if (nameInput && quizSelect) {
-          window.studentName = nameInput.value.trim(); // Update the global studentName (temporary)
+          window.studentName = nameInput.value.trim();
           const selectedQuizId = quizSelect.value;
-          loadQuiz(selectedQuizId); // Assuming loadQuiz is in scope
+          handleStartQuizSubmit(selectedQuizId); // Call the handler from app.js
         } else {
           console.error("Name or quiz input elements NOT FOUND (inline).");
         }
