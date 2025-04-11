@@ -18,21 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderStartScreen();
 });
 
-async function renderStartScreen() { // Make renderStartScreen async
-  await Views.showStart(appContainer); // Wait for the template to render
-
-  const form = document.getElementById('start-form');
-  console.log('Start form element:', form);
-  if (form) {
-    form.addEventListener('submit', handleStartQuiz);
-    // Get direct references to the input and select elements
-    form.nameInput = form.querySelector('input[name="name"]');
-    form.quizSelect = form.querySelector('select[name="quiz"]');
-    console.log('Directly found nameInput:', form.nameInput);
-    console.log('Directly found quizSelect:', form.quizSelect);
-  } else {
-    console.log('Start form not found!');
-  }
+async function renderStartScreen() {
+  await Views.showStart(appContainer);
 }
 
 function handleStartQuiz(e) {
