@@ -57,13 +57,17 @@ function handleStartQuiz(e) {
 
 // === Load Quiz JSON from API ===
 async function loadQuiz(quizId) {
+  console.log('loadQuiz called with ID:', quizId);
   try {
     const res = await fetch(quizzesEndpoint);
+    console.log('API Response Status:', res.status);
     if (!res.ok) {
       throw new Error(`Failed to fetch quizzes: ${res.status}`);
     }
     const data = await res.json();
+    console.log('API Response Data:', data);
     currentQuiz = data.find(quiz => quiz.id.toString() === quizId);
+    console.log('Found currentQuiz:', currentQuiz);
 
     if (!currentQuiz) {
       throw new Error(`Quiz with ID ${quizId} not found`);
@@ -77,7 +81,7 @@ async function loadQuiz(quizId) {
       startTime = Date.now();
 
       startTimer();
-      renderCurrentQuestion();
+      await renderCurrentQuestion(); // Keep the await
     } else {
       console.error(`Error: Could not load quiz with ID: ${quizId}`);
       // Optionally display an error message to the user
