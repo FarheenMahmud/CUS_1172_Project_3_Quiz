@@ -2,10 +2,37 @@ import { loadTemplate } from './utils.js';
 
 export const Views = {
   async showStart(container) {
-    const html = await loadTemplate('start');
+    const templateSource = document.getElementById('start').innerHTML;
+    const template = Handlebars.compile(templateSource);
+    const html = template({}); // No context needed for this simple template
     container.innerHTML = html;
+    const form = container.querySelector('#start-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameInput = form.querySelector('input[name="name"]');
+        const quizSelect = form.querySelector('select[name="quiz"]');
+
+        console.log('handleStartQuiz (inline) called');
+        console.log('nameInput (inline):', nameInput);
+        console.log('quizSelect (inline):', quizSelect);
+
+        if (nameInput && quizSelect) {
+          studentName = nameInput.value.trim();
+          const selectedQuizId = quizSelect.value;
+          loadQuiz(selectedQuizId);
+        } else {
+          console.error("Name or quiz input elements NOT FOUND (inline).");
+        }
+      });
+    } else {
+      console.log('Start form not found!');
+    }
     return Promise.resolve();
   },
+
+
+
 
   async showQuestion(container, question) {
     const templateName = {
