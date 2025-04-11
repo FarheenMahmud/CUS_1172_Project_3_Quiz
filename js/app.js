@@ -10,6 +10,12 @@ let totalQuestions = 0;
 let startTime = null;
 let quizInterval = null;
 
+function handleStartQuizSubmit(selectedQuizId) {
+  loadQuiz(selectedQuizId);
+}
+
+export { handleStartQuizSubmit }; // Make sure to export this function
+
 // === DOM References ===
 const appContainer = document.getElementById('app');
 const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ';
@@ -51,28 +57,39 @@ function handleStartQuiz(e) {
 
 // === Load Quiz JSON from API ===
 async function loadQuiz(quizId) {
+  console.log('loadQuiz called with ID:', quizId);
   try {
     const res = await fetch(quizzesEndpoint);
+    console.log('API Response Status:', res.status);
     if (!res.ok) {
       throw new Error(`Failed to fetch quizzes: ${res.status}`);
     }
     const data = await res.json();
+    console.log('API Response Data:', data);
     currentQuiz = data.find(quiz => quiz.id.toString() === quizId);
+    console.log('Found currentQuiz:', currentQuiz);
 
     if (!currentQuiz) {
       throw new Error(`Quiz with ID ${quizId} not found`);
     }
 
-    totalQuestions = currentQuiz.questions.length;
-    currentQuestionIndex = 0;
-    score = 0;
-    startTime = Date.now();
+    // Only proceed if currentQuiz has a value
+    if (currentQuiz) {
+      totalQuestions = currentQuiz.questions.length;
+      currentQuestionIndex = 0;
+      score = 0;
+      startTime = Date.now();
 
-    startTimer();
-    renderCurrentQuestion();
+      startTimer();
+      await renderCurrentQuestion(); // Keep the await
+    } else {
+      console.error(`Error: Could not load quiz with ID: ${quizId}`);
+      // Optionally display an error message to the user
+    }
+
   } catch (error) {
     console.error('Error loading quiz:', error);
-    // Consider displaying an error message to the user in the UI
+    // Optionally display an error message to the user
   }
 }
 
@@ -127,10 +144,10 @@ function handleAnswerSubmit(e) {
 
 function getAnswerFromForm(form, question) {
   switch (question.type) {
-    case 'mc':
-    case 'image':
+    case 'multiple-choice':
+    case 'image-choice':
       return form.querySelector('input[name="answer"]:checked')?.value;
-    case 'text':
+    case 'narrative':
       return form.answer.value.trim();
     default:
       return '';
