@@ -8,13 +8,13 @@
           "type": "multiple-choice",
           "question": "Which HTML tag is used to define an unordered list?",
           "choices": ["<ul>", "<ol>", "<li>", "<list>"],
-          "answer": "<ul>",
+          "correctAnswer": "<ul>",
           "explanation": "<ul> defines an unordered list. <ol> is for ordered lists."
         },
         {
           "type": "narrative",
           "question": "What CSS property controls the text size?",
-          "answer": "font-size",
+          "correctAnswer": "font-size",
           "explanation": "`font-size` is the property used to define the size of text in CSS."
         },
         {
@@ -30,7 +30,7 @@
               "label": "B"
             }
           ],
-          "answer": "A",
+          "correctAnswer": "A",
           "explanation": "The yellow square with JS is the JavaScript logo."
         }
       ]
