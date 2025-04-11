@@ -7,23 +7,21 @@ import { handleStartQuizSubmit } from './app.js'; // Import the handler
 
 export const Views = {
   async showStart(container, context) {
-    const templateSource = document.getElementById('start').innerHTML;
-    const template = Handlebars.compile(templateSource);
-    const html = template({});
+    const html = await loadTemplate('home', {}); // Load the 'home.handlebars' template
     container.innerHTML = html;
     const form = container.querySelector('#start-form');
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const nameInput = form.querySelector('input[name="name"]');
-        const quizSelect = form.querySelector('select[name="quiz"]');
+        const nameInput = form.querySelector('#student-name'); // Use the ID from home.handlebars
+        const quizSelect = form.querySelector('#quiz'); // Use the ID from home.handlebars
 
         if (nameInput && quizSelect) {
           window.studentName = nameInput.value.trim();
           const selectedQuizId = quizSelect.value;
           handleStartQuizSubmit(selectedQuizId); // Call the handler from app.js
         } else {
-          console.error("Name or quiz input elements NOT FOUND (inline).");
+          console.error("Name or quiz input elements NOT FOUND (in home.handlebars).");
         }
       });
     } else {
