@@ -138,16 +138,14 @@ function handleAnswerSubmit(e) {
   }
 }
 
-function getAnswerFromForm(form, question) {
-  switch (question.type) {
-    case 'mc':
-    case 'image':
-      return form.querySelector('input[name="answer"]:checked')?.value;
-    case 'text':
-      return form.answer.value.trim();
-    default:
-      return '';
-  }
+switch (question.type) {
+  case 'multiple-choice':
+  case 'image-choice':
+    return form.querySelector('input[name="answer"]:checked')?.value;
+  case 'narrative':
+    return form.answer.value.trim();
+  default:
+    return '';
 }
 
 function checkAnswer(userAnswer, question) {
