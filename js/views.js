@@ -50,14 +50,9 @@ export const Views = {
     setTimeout(() => container.innerHTML = '', 1000);
   },
 
-  async showWrong(container, { explanation, nextQuestionCallback }) { // Receive the callback
+  async showWrong(container, explanation) {
     const html = await loadTemplate('feedback-wrong', { explanation });
     container.innerHTML = html;
-
-    const gotItBtn = container.querySelector('.got-it-btn');
-    if (gotItBtn && nextQuestionCallback) {
-      gotItBtn.addEventListener('click', nextQuestionCallback); // Call the callback
-    }
   },
 
   async showResult(container, { studentName, score, totalQuestions }) {
