@@ -210,7 +210,8 @@ function renderFeedback(type, question = null) {
       explanation: question.explanation || '',
     });
 
-    const gotItBtn = document.getElementById('got-it-btn');
+    const gotItBtn = document.querySelector('.got-it-btn');
+
     if (gotItBtn) {
       gotItBtn.addEventListener('click', () => {
         currentQuestionIndex++;
