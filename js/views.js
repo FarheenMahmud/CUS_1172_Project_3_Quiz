@@ -82,19 +82,28 @@ export const Views = {
       resultMessage
     });
     container.innerHTML = html;
-
-    const restartBtn = container.querySelector('#restart-btn');
-    console.log('Retake Button in showResult:', restartBtn);
-
-    if (restartBtn) {
-      restartBtn.addEventListener('click', () => {
-        console.log('Retake Quiz button clicked');
-        if (appModule && appModule.renderStartScreen) {
-          appModule.renderStartScreen();
-        } else {
-          console.error('appModule not loaded yet or renderStartScreen not found.');
-        }
-      });
-    }
+  
+    // Add a small delay to ensure the DOM has updated
+    setTimeout(() => {
+      const restartBtn = container.querySelector('#restart-btn');
+      console.log('Retake Button in showResult (after timeout):', restartBtn);
+  
+      if (restartBtn) {
+        restartBtn.addEventListener('click', async () => {
+          console.log('Retake Quiz button clicked');
+          try {
+            const module = await import('./app.js');
+            if (module && module.renderStartScreen) {
+              module.renderStartScreen();
+              console.log('renderStartScreen called');
+            } else {
+              console.error('appModule not loaded yet or renderStartScreen not found.');
+            }
+          } catch (error) {
+            console.error('Error importing app.js:', error);
+          }
+        });
+      }
+    }, 0); // A timeout of 0 will execute after the current event loop
   },
 };
