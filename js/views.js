@@ -59,18 +59,28 @@ export const Views = {
       gotItBtn.addEventListener('click', nextQuestionCallback); // Call the callback
     }
   },
+async showResult(container, { studentName, score, totalQuestions }) {
+  const passed = score / totalQuestions >= 0.8;
+  const resultMessage = passed ? `You passed the quiz 🎉` : `You did not pass 😢`;
+  const html = await loadTemplate('results', { // Corrected filename
+    name: studentName,
+    score,
+    total: totalQuestions,
+    resultMessage
+  });
+  container.innerHTML = html;
 
-  async showResult(container, { studentName, score, totalQuestions }) {
-    const passed = score / totalQuestions >= 0.8;
-    const resultMessage = passed ? `You passed the quiz 🎉` : `You did not pass 😢`;
-    const html = await loadTemplate('result', {
-      name: studentName, // rename for clarity
-      score,
-      total: totalQuestions,
-      resultMessage
+  const restartBtn = container.querySelector('#restart-btn');
+  console.log('Retake Button in showResult:', restartBtn); // Add this log
+
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      console.log('Retake Quiz button clicked');
+      // You need to trigger the start screen from here
+      // Consider returning a function or using a custom event
     });
-    container.innerHTML = html;
   }
+},
 
 
 };
