@@ -13,7 +13,7 @@ export const Views = {
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-         // Use the ID from home.handlebars
+        const nameInput = form.querySelector('#name'); // Use the ID from home.handlebars
         const quizSelect = form.querySelector('#quiz'); // Use the ID from home.handlebars
 
         if (nameInput && quizSelect) {
@@ -38,7 +38,7 @@ export const Views = {
       'multiple-choice': 'question-mc',
       'narrative': 'question-narrative',
       'image-choice': 'question-image'
-    }[question.type];
+    }[question.question?.type];
 
     const html = await loadTemplate(templateName, question);
     container.innerHTML = html;
@@ -50,9 +50,14 @@ export const Views = {
     setTimeout(() => container.innerHTML = '', 1000);
   },
 
-  async showWrong(container, explanation) {
+   async showWrong(container, { explanation, nextQuestionCallback }) { // Receive the callback
     const html = await loadTemplate('feedback-wrong', { explanation });
     container.innerHTML = html;
+
+    const gotItBtn = container.querySelector('.got-it-btn');
+    if (gotItBtn && nextQuestionCallback) {
+      gotItBtn.addEventListener('click', nextQuestionCallback); // Call the callback
+    }
   },
 
   async showResult(container, { studentName, score, totalQuestions }) {
