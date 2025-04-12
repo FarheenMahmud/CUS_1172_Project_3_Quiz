@@ -14,8 +14,6 @@ function handleStartQuizSubmit(selectedQuizId) {
   loadQuiz(selectedQuizId);
 }
 
-export { handleStartQuizSubmit }; // Make sure to export this function
-
 // === DOM References ===
 const appContainer = document.getElementById('app');
 const quizApiBase = 'https://my-json-server.typicode.com/FarheenMahmud/CUS_1172_PROJECT_3_QUIZ';
@@ -163,8 +161,6 @@ function handleAnswer(userAnswer) {
   }
 }
 
-
-
 function handleAnswerSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -235,12 +231,11 @@ function updateScoreboard() {
   `;
 }
 
+// *** ADD THE FUNCTION DEFINITION HERE ***
 function incrementQuestionAndRender() {
   currentQuestionIndex++;
   renderCurrentQuestion();
 }
-
-export { handleStartQuizSubmit, renderStartScreen, incrementQuestionAndRender }; // <---- ADD IT HERE!
 
 // === End of Quiz ===
 async function endQuiz() { // Make endQuiz async
@@ -261,3 +256,6 @@ async function endQuiz() { // Make endQuiz async
     });
   }
 }
+
+// *** UPDATE THE EXPORT STATEMENT HERE ***
+export { handleStartQuizSubmit, renderStartScreen, incrementQuestionAndRender };
