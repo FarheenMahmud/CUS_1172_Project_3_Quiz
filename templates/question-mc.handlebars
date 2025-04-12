@@ -1,6 +1,6 @@
 <div class="container">
-  <h3>{{question.question}}</h3> <!-- this now accesses the text of the question -->
-  {{#each question.choices}}
+  <h3>{{questionText}}</h3>
+  {{#each choices}}
     <button class="btn btn-outline-primary my-1 choice-btn" data-answer="{{this}}">{{this}}</button>
   {{/each}}
 </div>

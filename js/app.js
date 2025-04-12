@@ -111,43 +111,43 @@ async function renderCurrentQuestion() {
     return;
   }
 
-  const question = currentQuiz.questions[currentQuestionIndex];
+  const q = currentQuiz.questions[currentQuestionIndex];
+  const qType = q.type;
+
   const questionData = {
     questionNumber: currentQuestionIndex + 1,
     totalQuestions,
-    question,
+    questionText: q.question,
+    choices: q.choices,
+    correctAnswer: q.correctAnswer,
+    explanation: q.explanation,
+    type: q.type,
     studentName,
   };
 
-  await Views.showQuestion(appContainer, questionData);
+  const templateName = {
+    'multiple-choice': 'question-mc',
+    'image-choice': 'question-image',
+    'narrative': 'question-narrative'
+  }[qType];
 
-  const qType = question.type;
+  const html = await loadTemplate(templateName, questionData);
+  appContainer.innerHTML = html;
 
+  // Add event listeners after rendering
   if (qType === 'multiple-choice') {
-    const buttons = document.querySelectorAll('.choice-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const userAnswer = btn.getAttribute('data-answer');
-        handleAnswer(userAnswer);
-      });
-    });
+    document.querySelectorAll('.choice-btn').forEach(btn =>
+      btn.addEventListener('click', () => handleAnswer(btn.dataset.answer))
+    );
   } else if (qType === 'image-choice') {
-    const images = document.querySelectorAll('.img-choice');
-    images.forEach(img => {
-      img.addEventListener('click', () => {
-        const userAnswer = img.getAttribute('data-answer');
-        handleAnswer(userAnswer);
-      });
-    });
+    document.querySelectorAll('.img-choice').forEach(img =>
+      img.addEventListener('click', () => handleAnswer(img.dataset.answer))
+    );
   } else if (qType === 'narrative') {
-    const submitBtn = document.querySelector('.submit-narrative');
-    const input = document.querySelector('#narrative-answer');
-    if (submitBtn && input) {
-      submitBtn.addEventListener('click', () => {
-        const userAnswer = input.value.trim();
-        handleAnswer(userAnswer);
-      });
-    }
+    document.querySelector('.submit-narrative')?.addEventListener('click', () => {
+      const input = document.querySelector('#narrative-answer');
+      handleAnswer(input?.value.trim());
+    });
   }
 }
 
