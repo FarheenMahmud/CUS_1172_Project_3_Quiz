@@ -235,6 +235,13 @@ function updateScoreboard() {
   `;
 }
 
+function incrementQuestionAndRender() {
+  currentQuestionIndex++;
+  renderCurrentQuestion();
+}
+
+export { handleStartQuizSubmit, renderStartScreen, incrementQuestionAndRender }; // <---- ADD IT HERE!
+
 // === End of Quiz ===
 async function endQuiz() { // Make endQuiz async
   clearInterval(quizInterval);
