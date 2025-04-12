@@ -1,4 +1,4 @@
-//app.js
+// app.js
 
 import { Views } from './views.js';
 
@@ -214,6 +214,7 @@ async function renderFeedback(type, question = null) {
 
     if (gotItBtn) {
       gotItBtn.addEventListener('click', () => {
+        console.log('Got It button clicked'); // ADDED CONSOLE LOG
         currentQuestionIndex++;
         renderCurrentQuestion();
       });
@@ -248,6 +249,7 @@ function endQuiz() {
   const restartBtn = document.getElementById('restart-btn');
   if (restartBtn) {
     restartBtn.addEventListener('click', () => {
+      console.log('Retake Quiz button clicked'); // ADDED CONSOLE LOG
       renderStartScreen();
     });
   }
