@@ -204,10 +204,15 @@ async function renderFeedback(type, question = null) {
     setTimeout(() => {
       renderCurrentQuestion();
     }, 1000);
+  
   } else {
     Views.showWrong(appContainer, {
       correctAnswer: question.correctAnswer,
       explanation: question.explanation || '',
+      nextQuestionCallback: () => { // Pass a callback function
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
     });
 
     const gotItBtn = document.querySelector('.got-it-btn');
