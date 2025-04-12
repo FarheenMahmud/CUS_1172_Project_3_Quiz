@@ -236,10 +236,10 @@ function updateScoreboard() {
 }
 
 // === End of Quiz ===
-function endQuiz() {
+async function endQuiz() { // Make endQuiz async
   clearInterval(quizInterval);
   const passed = (score / totalQuestions) >= 0.8;
-  Views.showResult(appContainer, {
+  await Views.showResult(appContainer, { // Await the rendering of the results
     studentName,
     score,
     totalQuestions,
@@ -249,7 +249,7 @@ function endQuiz() {
   const restartBtn = document.getElementById('restart-btn');
   if (restartBtn) {
     restartBtn.addEventListener('click', () => {
-      console.log('Retake Quiz button clicked'); // ADDED CONSOLE LOG
+      console.log('Retake Quiz button clicked');
       renderStartScreen();
     });
   }
