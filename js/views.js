@@ -83,19 +83,18 @@ export const Views = {
     });
     container.innerHTML = html;
   
-    // Add a small delay to ensure the DOM has updated
     setTimeout(() => {
       const restartBtn = container.querySelector('#restart-btn');
       console.log('Retake Button in showResult (after timeout):', restartBtn);
   
       if (restartBtn) {
         restartBtn.addEventListener('click', async () => {
-          console.log('Retake Quiz button clicked');
+          console.log('Retake Quiz button clicked'); // This MUST log on click
           try {
             const module = await import('./app.js');
             if (module && module.renderStartScreen) {
               module.renderStartScreen();
-              console.log('renderStartScreen called');
+              console.log('renderStartScreen called'); // This should log after renderStartScreen
             } else {
               console.error('appModule not loaded yet or renderStartScreen not found.');
             }
@@ -103,7 +102,9 @@ export const Views = {
             console.error('Error importing app.js:', error);
           }
         });
+        console.log('Event listener attached to Retake button.'); // Confirm listener attachment
       }
-    }, 0); // A timeout of 0 will execute after the current event loop
+    }, 0);
   },
+  
 };
