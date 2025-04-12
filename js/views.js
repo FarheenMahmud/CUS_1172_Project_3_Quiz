@@ -13,7 +13,7 @@ export const Views = {
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const nameInput = form.querySelector('#name'); // Use the ID from home.handlebars
+         // Use the ID from home.handlebars
         const quizSelect = form.querySelector('#quiz'); // Use the ID from home.handlebars
 
         if (nameInput && quizSelect) {
@@ -38,7 +38,7 @@ export const Views = {
       'multiple-choice': 'question-mc',
       'narrative': 'question-narrative',
       'image-choice': 'question-image'
-    }[question.question?.type];
+    }[question.type];
 
     const html = await loadTemplate(templateName, question);
     container.innerHTML = html;

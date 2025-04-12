@@ -197,14 +197,13 @@ function checkAnswer(userAnswer, question) {
 }
 
 // === Feedback ===
-async function renderFeedback(type, question = null) {
+function renderFeedback(type, question = null) {
   if (type === 'correct') {
-    await Views.showCorrect(appContainer); // Use await
-    currentQuestionIndex++;
+    Views.showCorrect(appContainer);
     setTimeout(() => {
+      currentQuestionIndex++;
       renderCurrentQuestion();
     }, 1000);
-  
   } else {
     Views.showWrong(appContainer, {
       correctAnswer: question.correctAnswer,
