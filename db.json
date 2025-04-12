@@ -16,6 +16,43 @@
           "question": "What CSS property controls the text size?",
           "correctAnswer": "font-size",
           "explanation": "`font-size` is the property used to define the size of text in CSS."
+        },
+        {
+          "type": "multiple-choice",
+          "question": "What does CSS stand for?",
+          "choices": ["Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Syntax", "Computer Style Standards"],
+          "correctAnswer": "Cascading Style Sheets",
+          "explanation": "CSS stands for Cascading Style Sheets and is used for styling web pages."
+        },
+        {
+          "type": "image-choice",
+          "question": "Which of these is the correct HTML5 semantic tag for a standalone piece of content?",
+          "choices": [
+            {
+              "img": "https://via.placeholder.com/100/FF0000/FFFFFF?Text=DIV",
+              "label": "A"
+            },
+            {
+              "img": "https://via.placeholder.com/100/00FF00/FFFFFF?Text=SECTION",
+              "label": "B"
+            },
+            {
+              "img": "https://via.placeholder.com/100/0000FF/FFFFFF?Text=ARTICLE",
+              "label": "C"
+            },
+            {
+              "img": "https://via.placeholder.com/100/FFFF00/000000?Text=SPAN",
+              "label": "D"
+            }
+          ],
+          "correctAnswer": "C",
+          "explanation": "<article> represents a self-contained composition in a document, page, application, or site."
+        },
+        {
+          "type": "narrative",
+          "question": "What is the CSS property used to make an element invisible but still take up space in the layout?",
+          "correctAnswer": "visibility: hidden;",
+          "explanation": "`visibility: hidden;` hides the element, but it remains in the normal flow of the document."
         }
       ]
     },
@@ -44,6 +81,26 @@
           "question": "What keyword declares a variable in JavaScript?",
           "correctAnswer": "let",
           "explanation": "`let` is commonly used to declare variables in modern JavaScript."
+        },
+        {
+          "type": "multiple-choice",
+          "question": "Which of the following is NOT a primitive data type in JavaScript?",
+          "choices": ["string", "boolean", "object", "number"],
+          "correctAnswer": "object",
+          "explanation": "Object is a reference data type in JavaScript, while string, boolean, and number are primitive types."
+        },
+        {
+          "type": "narrative",
+          "question": "What is the purpose of the `addEventListener` method in JavaScript?",
+          "correctAnswer": "to attach an event handler to an element",
+          "explanation": "`addEventListener` is used to set up functions to be called when specific events (like clicks) occur on an element."
+        },
+        {
+          "type": "multiple-choice",
+          "question": "What is the output of `console.log(2 + '2');` in JavaScript?",
+          "choices": ["4", "22", "NaN", "Error"],
+          "correctAnswer": "22",
+          "explanation": "In JavaScript, when the `+` operator is used with a number and a string, the number is coerced into a string, and they are concatenated."
         }
       ]
     }
