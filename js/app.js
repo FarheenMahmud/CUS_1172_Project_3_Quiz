@@ -121,11 +121,49 @@ async function renderCurrentQuestion() {
 
   await Views.showQuestion(appContainer, questionData);
 
-  const form = document.getElementById('question-form');
-  if (form) {
-    form.addEventListener('submit', handleAnswerSubmit);
+  const qType = question.type;
+
+  if (qType === 'multiple-choice') {
+    const buttons = document.querySelectorAll('.choice-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const userAnswer = btn.getAttribute('data-answer');
+        handleAnswer(userAnswer);
+      });
+    });
+  } else if (qType === 'image-choice') {
+    const images = document.querySelectorAll('.img-choice');
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        const userAnswer = img.getAttribute('data-answer');
+        handleAnswer(userAnswer);
+      });
+    });
+  } else if (qType === 'narrative') {
+    const submitBtn = document.querySelector('.submit-narrative');
+    const input = document.querySelector('#narrative-answer');
+    if (submitBtn && input) {
+      submitBtn.addEventListener('click', () => {
+        const userAnswer = input.value.trim();
+        handleAnswer(userAnswer);
+      });
+    }
   }
 }
+
+function handleAnswer(userAnswer) {
+  const question = currentQuiz.questions[currentQuestionIndex];
+  const isCorrect = checkAnswer(userAnswer, question);
+
+  if (isCorrect) {
+    score++;
+    renderFeedback('correct');
+  } else {
+    renderFeedback('wrong', question);
+  }
+}
+
+
 
 function handleAnswerSubmit(e) {
   e.preventDefault();
