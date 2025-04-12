@@ -29,19 +29,19 @@
           "question": "Which of these is the correct HTML5 semantic tag for a standalone piece of content?",
           "choices": [
             {
-              "img": "https://via.placeholder.com/100/FF0000/FFFFFF?Text=DIV",
+              "img": "https://cdn.icon-icons.com/icons2/2108/PNG/512/html_div_icon_130944.png",
               "label": "A"
             },
             {
-              "img": "https://via.placeholder.com/100/00FF00/FFFFFF?Text=SECTION",
+              "img": "https://www.computerhope.com/jargon/h/section.png",
               "label": "B"
             },
             {
-              "img": "https://via.placeholder.com/100/0000FF/FFFFFF?Text=ARTICLE",
+              "img": "https://cdn.iconscout.com/icon/free/png-512/article-1944798-1644144.png",
               "label": "C"
             },
             {
-              "img": "https://via.placeholder.com/100/FFFF00/000000?Text=SPAN",
+              "img": "https://www.computerhope.com/jargon/h/span.png",
               "label": "D"
             }
           ],
