@@ -204,7 +204,6 @@ async function renderFeedback(type, question = null) {
     setTimeout(() => {
       renderCurrentQuestion();
     }, 1000);
-  
   } else {
     Views.showWrong(appContainer, {
       correctAnswer: question.correctAnswer,
