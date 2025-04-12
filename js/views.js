@@ -1,8 +1,12 @@
 // views.js
 
 import { loadTemplate } from './utils.js';
-import { renderStartScreen } from './app.js'; // Import renderStartScreen
-import { renderCurrentQuestion } from './app.js'; // Import renderCurrentQuestion
+
+let appModule; // To hold the imported app.js module
+
+import('./app.js').then(module => {
+  appModule = module;
+});
 
 export const Views = {
   async showStart(container, context) {
@@ -17,10 +21,11 @@ export const Views = {
         if (nameInput && quizSelect) {
           window.studentName = nameInput.value.trim();
           const selectedQuizId = quizSelect.value;
-          // Assuming handleStartQuizSubmit is in app.js and correctly loads the quiz
-          import('./app.js').then(module => {
-            module.handleStartQuizSubmit(selectedQuizId);
-          });
+          if (appModule && appModule.handleStartQuizSubmit) {
+            appModule.handleStartQuizSubmit(selectedQuizId);
+          } else {
+            console.error('appModule not loaded yet or handleStartQuizSubmit not found.');
+          }
         } else {
           console.error("Name or quiz input elements NOT FOUND (in home.handlebars).");
         }
@@ -55,16 +60,16 @@ export const Views = {
     const gotItBtn = container.querySelector('.got-it-btn');
     console.log('Got It Button in showWrong:', gotItBtn);
 
-    return () => { // Return a function that attaches the listener and calls renderNextQuestion
-      if (gotItBtn) {
-        gotItBtn.addEventListener('click', () => {
-          console.log('Got It button clicked');
-          import('./app.js').then(module => {
-            module.incrementQuestionAndRender(); // Assuming you'll create this in app.js
-          });
-        });
-      }
-    };
+    if (gotItBtn) {
+      gotItBtn.addEventListener('click', () => {
+        console.log('Got It button clicked');
+        if (appModule && appModule.incrementQuestionAndRender) {
+          appModule.incrementQuestionAndRender();
+        } else {
+          console.error('appModule not loaded yet or incrementQuestionAndRender not found.');
+        }
+      });
+    }
   },
 
   async showResult(container, { studentName, score, totalQuestions }) {
@@ -84,9 +89,11 @@ export const Views = {
     if (restartBtn) {
       restartBtn.addEventListener('click', () => {
         console.log('Retake Quiz button clicked');
-        import('./app.js').then(module => {
-          module.renderStartScreen(); // Call the renderStartScreen function
-        });
+        if (appModule && appModule.renderStartScreen) {
+          appModule.renderStartScreen();
+        } else {
+          console.error('appModule not loaded yet or renderStartScreen not found.');
+        }
       });
     }
   },
