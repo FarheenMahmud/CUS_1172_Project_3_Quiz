@@ -10,7 +10,18 @@
 <body>
   <div id="app" class="container mt-5"></div>
 
- 
+  <script id="start" type="text/x-handlebars-template">
+   
+    <h2>Welcome!</h2>
+    <form id="start-form">
+      <input type="text" name="name" placeholder="Your name" required />
+      <select name="quiz" required>
+        <option value="">Select a quiz</option>
+        <option value="1">Front-End Web Development</option>
+      </select>
+      <button type="submit">Start Quiz</button>
+    </form>
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
 

@@ -2,12 +2,6 @@
 
 import { loadTemplate } from './utils.js';
 
-let appModule; // To hold the imported app.js module
-
-import('./app.js').then(module => {
-  appModule = module;
-});
-
 export const Views = {
   async showStart(container, context) {
     const html = await loadTemplate('home', {});
@@ -21,11 +15,13 @@ export const Views = {
         if (nameInput && quizSelect) {
           window.studentName = nameInput.value.trim();
           const selectedQuizId = quizSelect.value;
-          if (appModule && appModule.handleStartQuizSubmit) {
-            appModule.handleStartQuizSubmit(selectedQuizId);
-          } else {
-            console.error('appModule not loaded yet or handleStartQuizSubmit not found.');
-          }
+          import('./app.js').then(module => {
+            if (module && module.handleStartQuizSubmit) {
+              module.handleStartQuizSubmit(selectedQuizId);
+            } else {
+              console.error('appModule not loaded yet or handleStartQuizSubmit not found.');
+            }
+          });
         } else {
           console.error("Name or quiz input elements NOT FOUND (in home.handlebars).");
         }
@@ -63,47 +59,49 @@ export const Views = {
     if (gotItBtn) {
       gotItBtn.addEventListener('click', () => {
         console.log('Got It button clicked');
-        if (appModule && appModule.incrementQuestionAndRender) {
-          appModule.incrementQuestionAndRender();
-        } else {
-          console.error('appModule not loaded yet or incrementQuestionAndRender not found.');
-        }
+        import('./app.js').then(module => {
+          if (module && module.incrementQuestionAndRender) {
+            module.incrementQuestionAndRender();
+          } else {
+            console.error('appModule not loaded yet or incrementQuestionAndRender not found.');
+          }
+        });
       });
     }
   },
 
   async showResult(container, { studentName, score, totalQuestions }) {
-  const passed = score / totalQuestions >= 0.8;
-  const resultMessage = passed ? `You passed the quiz 🎉` : `You did not pass 😢`;
-  const html = await loadTemplate('results', {
-    name: studentName,
-    score,
-    total: totalQuestions,
-    resultMessage
-  });
-  container.innerHTML = html;
+    const passed = score / totalQuestions >= 0.8;
+    const resultMessage = passed ? `You passed the quiz 🎉` : `You did not pass 😢`;
+    const html = await loadTemplate('results', {
+      name: studentName,
+      score,
+      total: totalQuestions,
+      resultMessage
+    });
+    container.innerHTML = html;
 
-  setTimeout(() => {
-    const restartBtn = container.querySelector('#restart-btn');
-    console.log('Retake Button in showResult (after timeout):', restartBtn);
+    setTimeout(() => {
+      const restartBtn = container.querySelector('#restart-btn');
+      console.log('Retake Button in showResult (after timeout):', restartBtn);
 
-    if (restartBtn) {
-      restartBtn.addEventListener('click', async () => {
-        console.log('Retake Quiz button clicked'); // This MUST log on click
-        try {
-          const module = await import('./app.js');
-          if (module && module.renderStartScreen) {
-            module.renderStartScreen();
-            console.log('renderStartScreen called'); // This should log after renderStartScreen
-          } else {
-            console.error('appModule not loaded yet or renderStartScreen not found.');
+      if (restartBtn) {
+        restartBtn.addEventListener('click', async () => { // Make the callback async
+          console.log('Retake Quiz button clicked');
+          try {
+            const module = await import('./app.js'); // Await the import
+            if (module && module.renderStartScreen) {
+              module.renderStartScreen();
+              console.log('renderStartScreen called');
+            } else {
+              console.error('appModule not loaded yet or renderStartScreen not found.');
+            }
+          } catch (error) {
+            console.error('Error importing app.js:', error);
           }
-        } catch (error) {
-          console.error('Error importing app.js:', error);
-        }
-      });
-      console.log('Event listener attached to Retake button.'); // Confirm listener attachment
-    }
-  }, 0);
-},
+        });
+        console.log('Event listener attached to Retake button.');
+      }
+    }, 0);
+  },
 };
