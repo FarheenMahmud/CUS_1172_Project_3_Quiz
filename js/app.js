@@ -14,7 +14,16 @@ function handleStartQuizSubmit(selectedQuizId) {
   loadQuiz(selectedQuizId);
 }
 
-export { handleStartQuizSubmit }; // Make sure to export this function
+async function renderStartScreen() {
+  await Views.showStart(appContainer, { studentName: studentName });
+}
+
+function incrementQuestionAndRender() {
+  currentQuestionIndex++;
+  renderCurrentQuestion();
+}
+
+export { handleStartQuizSubmit, renderStartScreen, incrementQuestionAndRender };
 
 // === DOM References ===
 const appContainer = document.getElementById('app');

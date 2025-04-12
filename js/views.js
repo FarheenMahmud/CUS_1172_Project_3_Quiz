@@ -89,12 +89,12 @@ export const Views = {
   
       if (restartBtn) {
         restartBtn.addEventListener('click', async () => {
-          console.log('Retake Quiz button clicked'); // This MUST log on click
+          console.log('Retake Quiz button clicked');
           try {
             const module = await import('./app.js');
             if (module && module.renderStartScreen) {
-              module.renderStartScreen();
-              console.log('renderStartScreen called'); // This should log after renderStartScreen
+              module.renderStartScreen(); // Call it via the module
+              console.log('renderStartScreen called');
             } else {
               console.error('appModule not loaded yet or renderStartScreen not found.');
             }
@@ -102,9 +102,9 @@ export const Views = {
             console.error('Error importing app.js:', error);
           }
         });
-        console.log('Event listener attached to Retake button.'); // Confirm listener attachment
+        console.log('Event listener attached to Retake button.');
       }
     }, 0);
   },
-  
+
 };
